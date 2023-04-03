@@ -1,21 +1,7 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+import './pre-start';
+import { Port } from './contants';
+import server from './server';
 
-app.get('/', (req: any, res: any) => {
-  res.send('Hello World!');
-});
+const SERVER_START_MSG = 'Express server started on port: ' + Port.toString();
 
-app.get('/api/getUser', (req: any, res: any) => {
-  res.send({
-    code: 200,
-    result: [
-      { username: 'lxl', password: '123' },
-      { username: 'ycy', password: '123' },
-    ],
-  });
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+server.listen(Port, () => console.log(SERVER_START_MSG));
