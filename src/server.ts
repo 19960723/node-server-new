@@ -1,6 +1,15 @@
 import express from 'express';
 import path from 'path';
+// import logger from 'jet-logger'
+
 const app = express();
+
+// **** Setup **** //
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser(EnvVars.CookieProps.Secret));
+
 app.get('/', (req: any, res: any) => {
   res.send('Hello World!');
 });

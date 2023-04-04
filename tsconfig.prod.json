@@ -2,7 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "sourceMap": false,
-    "removeComments": true
+    "removeComments": true,
+    "outDir": "./dist"
   },
   "exclude": ["spec", "src/public/", "build.ts"]
 }

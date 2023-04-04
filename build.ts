@@ -5,17 +5,20 @@
 import fs from 'fs';
 import logger from 'jet-logger';
 import childProcess from 'child_process';
+import { resolve } from 'path';
 
 /**
  * Start
  */
 (async () => {
   try {
-    // Remove current build
-    await remove('./dist/');
+    const dist_path = resolve(__dirname, 'dist');
+    const public_path = resolve(__dirname, 'public');
+
+    await remove(dist_path);
     // Copy front-end files
-    await copy('./public', './dist/public');
-    // await copy('./src/views', './dist/views');
+    await copy(public_path, `${dist_path}\\public`);
+    await copy('./src/views', `${dist_path}\\views`);
     // Copy back-end files
     await exec('tsc --build tsconfig.prod.json', './');
   } catch (err) {
@@ -29,7 +32,7 @@ import childProcess from 'child_process';
 function remove(loc: string): Promise<void> {
   return new Promise((res, rej) => {
     try {
-      fs.unlinkSync(loc);
+      fs.rm(loc, { recursive: true }, () => {});
       res();
     } catch (error) {
       console.log(error);
@@ -44,7 +47,7 @@ function remove(loc: string): Promise<void> {
 function copy(src: string, dest: string): Promise<void> {
   return new Promise((res, rej) => {
     try {
-      fs.copyFileSync(src, dest);
+      fs.cp(src, dest, { recursive: true }, () => {});
       res();
     } catch (error) {
       console.log(error);

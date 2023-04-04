@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon",
+    "server": "nodemon",
     "build": "npx ts-node build.ts",
+    "tsc": "tsc",
     "lint:eslint": "eslint --cache --max-warnings 0  \"{src,mock}/**/*.{ts,tsx,js,jsx,}\" --fix"
   },
   "nodemonConfig": {
